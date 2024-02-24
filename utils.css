@@ -1,0 +1,42 @@
+.invert{
+    filter: invert(1);
+}
+
+.flex{
+    display: flex;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.items-center{
+    align-items: center;
+}
+
+.black-background{
+    background-color: black;
+    color: white;
+}
+
+.img-size-1{
+    width: 25px;
+    height: 25px;
+}
+
+.pad-1{
+    padding: 10px;
+}
+
+.mar-1{
+    margin-top: 17px;
+}
+
+.grey-background{
+    background-color: #121212;
+    color: white;
+}
+
+.rounded{
+    border-radius: 10px;
+}
