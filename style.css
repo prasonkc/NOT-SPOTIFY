@@ -140,9 +140,11 @@ body {
 }
 
 .playlist {
-    height: 100vh;
+    min-height: 88vh;
+    box-sizing: border-box;
     background-color: #121212;
     overflow-y: scroll;
+    position: relative;
 }
 
 .playlist::-webkit-scrollbar{
@@ -227,3 +229,13 @@ body {
     height: 51px;
 }
 
+.controls{
+    width: 100%;
+    position: absolute;
+    bottom: 50px;
+    gap: 35px;
+}
+
+.controls img{
+    height: 35px;
+}
