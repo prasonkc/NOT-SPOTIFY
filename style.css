@@ -1,30 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     background-color: black;
 }
 
-.left{
+.left {
     width: 25vw;
 }
 
-.home{
+.home {
     padding: 20px;
     margin: 10px;
     font-family: "Roboto", sans-serif;
     font-style: normal;
 }
 
-.right{
+.right {
     width: 75vw;
 }
 
-.home ul li{
+.home ul {
+    padding: 4px 0px;
+}
+
+.home ul li {
     display: flex;
     gap: 20px;
     align-items: center;
@@ -34,17 +40,17 @@ body{
 }
 
 
-.home ul li:last-child{
+.home ul li:last-child {
     color: #afafaf;
     transition: color 1s;
 }
 
-.home ul li:last-child:hover{
+.home ul li:last-child:hover {
     color: white;
     cursor: pointer;
 }
 
-.library{
+.library {
     min-height: 75vh;
     margin: 10px;
     padding: 20px;
@@ -52,7 +58,7 @@ body{
     box-sizing: border-box;
 }
 
-.library-header span{
+.library-header span {
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -60,16 +66,16 @@ body{
     transition: color 1s;
 }
 
-.library-header{
+.library-header {
     gap: 15px;
 }
 
-.library-header span:hover{
+.library-header span:hover {
     color: white;
     cursor: pointer;
 }
 
-.library-footer{
+.library-footer {
     position: absolute;
     bottom: 0;
     display: flex;
@@ -78,10 +84,146 @@ body{
     padding: 10px;
 }
 
-.library-footer div a{
+.library-footer div a {
     color: white;
     text-decoration: none;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 12px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #090909;
+    height: 55px;
+    margin: 10px 0 0 0;
+    padding: 10px 0;
+}
+
+.main-header .nav * {
+    margin: 5px;
+    padding: 5px;
+}
+
+.signup{
+    background-color: #090909;
+    border: none;
+    color: #9a9a9a;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 5px 10px;
+}
+
+.login{
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 12px;
+    width: 100px;
+    border-radius: 20px;
+    background-color: white;
+    border: none;
+    margin: 5px;
+    margin-right: 20px;
+}
+
+.signup:hover{
+    font-size: 15.5px;
+    color: white;
+}
+
+.login:hover{
+    font-size: 16px;
+    width: 102px;
+}
+
+.playlist {
+    height: 100vh;
+    background-color: #121212;
+    overflow-y: scroll;
+}
+
+.playlist::-webkit-scrollbar{
+    display: none;
+}
+
+.playlist>h1 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    padding: 50px 0 15px 25px;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    min-width: 15%;
+    margin: auto;
+}
+
+.card {
+    position: relative;
+    background-color: #171717;
+    width: 170px;
+    margin-left: 25px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    font-family: "poppins", sans-serif;
+    transition: background-color 0.3s ease-out;
+}
+
+.card img {
+    object-fit: contain;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card>h3 {
+    font-size: 15px;
+    padding: 5px 0;
+}
+
+.card>p {
+    font-size: 13px;
+    color: #a7a7a7;
+    font-weight: 500;
+    padding: 0 0;
+}
+
+.card:hover {
+    background-color: #272727;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in;
+}
+
+.card:hover .play-button {
+    top: 130px;
+    right: 22px;
+    opacity: 1;
+    transition: all 0.3s ease-in;
+}
+
+.play-button {
+    position: absolute;
+    top: 150px;
+    right: 22px;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+.play-button:hover{
+    top: 150px;
+    right: 20px;
+}
+
+.play-button:hover img{
+    width: 51px;
+    height: 51px;
 }
 
