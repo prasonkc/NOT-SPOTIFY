@@ -1,4 +1,4 @@
-const fetchURL = "http://127.0.0.1:3000/songs"
+const fetchURL = "http://127.0.0.1:3000/songs/";
 async function getSongs(){
     let songs = [];
     let apiCall = await fetch(fetchURL);
@@ -19,7 +19,7 @@ async function getSongs(){
 async function addSongsToLibrary(songs){
     let songLibrary = document.querySelector(".songlibrary")
     for (const i of songs) {
-        let song = i.split("/songs/")[1].replaceAll("%20", " ").replaceAll("_", " ")
+        let song = i.split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")
         songLibrary.innerHTML +=  `<li>
                                     <div class="info flex items-center justify-center gap10">
                                         <img src="./icons/music-icon.svg" alt="" srcset="" class="invert">
@@ -32,35 +32,52 @@ async function addSongsToLibrary(songs){
     }
 }
 
-function listenForLibClicks(songs){
-    let libPlayBtns = document.querySelectorAll(".lib-play-btn");
-    let currentlyPlaying;
 
-    for (let i = 0; i < libPlayBtns.length; i++) {
-        let clickedAudio = new Audio(songs[i]);
-        let button = libPlayBtns[i];
-        button.addEventListener("click", (e) => {
-            if(currentlyPlaying && currentlyPlaying != clickedAudio){
-                currentlyPlaying.pause();
-            }
-            clickedAudio.play()
-            currentlyPlaying = clickedAudio;
+let audio = new Audio()
+
+function listenForLibClicks(){
+    let libPlayBtns = document.querySelector(".songlibrary").getElementsByTagName("li");
+    let playBtn = document.getElementById("play-button");
+
+    let songName = document.getElementById("song-info");
+    
+    Array.from(libPlayBtns).forEach(button => {
+        button.addEventListener("click", () => {
+            audio.src = (fetchURL + button.querySelector("div").querySelector("p").innerText).replaceAll(" ", "_")
+            audio.play();
+            playBtn.src = "/icons/pause.svg";
+            songName.innerText = button.querySelector("div").querySelector("p").innerText
         })
-    }
+    });
+
+    listenForControls()
 }
 
+function listenForControls(){
+    let playBtn = document.getElementById("play-button")
+    
+    playBtn.addEventListener("click", () => {
+        if(audio.paused){
+            audio.play()
+            playBtn.src = "/icons/pause.svg"
+        }
+        else{
+            audio.pause()
+            playBtn.src = "/icons/play.svg"
+        }
+    })
+}
 
 async function main(){
     let songs = await getSongs();
     await addSongsToLibrary(songs);
 
     //listen for click on left library
-    listenForLibClicks(songs);
+    listenForLibClicks();
 
     //listen for playlist clicks
 
     //listen for controls
-    
 
     // console.log(songs)
 

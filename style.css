@@ -153,7 +153,7 @@ body {
 
 }
 
-.playlist::-webkit-scrollbar{
+.playlist::-webkit-scrollbar, .songlibrary::-webkit-scrollbar{
     display: none;
 }
 
@@ -237,9 +237,11 @@ body {
 
 .controls{
     width: 75%;
-    position: fixed;
-    bottom: 80px;
     gap: 35px;
+}
+
+.controls > *{
+    cursor: pointer;
 }
 
 .controls img{
@@ -298,3 +300,55 @@ body {
         transform: scale(110%) rotate(-40deg);
         transition: all 0.3s ease-in
 }
+
+.seeker{
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
+}
+
+.seeker div:nth-child(2){
+    display: flex;
+    justify-content: flex-start;
+}
+
+#song-info{
+    margin-top: 1%;
+    margin-left: 2%;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    align-items: center;
+    width: 50%;
+}
+
+#song-duration{
+    position: fixed;
+    margin-top: 1%;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    align-items: center;
+    position: relative;
+    left: 15%;
+}
+
+.seekbar{
+    position: fixed;
+    margin: 15px;
+    width: 73%;
+    background-color: rgb(195, 202, 206);
+    height: 6px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.circle{
+    width: 12px;
+    height: 12px;
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    left: 1%;
+    top: 12px;
+    transition: left 0.4s ease-in-out;
+}
+
