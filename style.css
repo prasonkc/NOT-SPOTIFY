@@ -12,6 +12,7 @@ body {
 }
 
 .left {
+    box-sizing: border-box;
     width: 25vw;
 }
 
@@ -20,10 +21,12 @@ body {
     margin: 10px;
     font-family: "Roboto", sans-serif;
     font-style: normal;
+    min-height: 16vh;
 }
 
 .right {
     width: 75vw;
+    box-sizing: border-box;
 }
 
 .home ul {
@@ -68,6 +71,7 @@ body {
 
 .library-header {
     gap: 15px;
+    margin-bottom: 10px;
 }
 
 .library-header span:hover {
@@ -141,10 +145,12 @@ body {
 
 .playlist {
     min-height: 88vh;
-    box-sizing: border-box;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     background-color: #121212;
     overflow-y: scroll;
     position: relative;
+
 }
 
 .playlist::-webkit-scrollbar{
@@ -230,12 +236,65 @@ body {
 }
 
 .controls{
-    width: 100%;
-    position: absolute;
-    bottom: 50px;
+    width: 75%;
+    position: fixed;
+    bottom: 80px;
     gap: 35px;
 }
 
 .controls img{
     height: 35px;
+}
+
+.songlibrary{
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    overflow-y: scroll;
+    height: 45vh;
+    gap: 10px;
+}
+
+.songlibrary li{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 6px;
+    font-family: "Robeto", sans-serif;
+    font-size: 13px;
+}
+
+.lib-play-btn{
+    display: flex;
+    min-width: 48px;
+    flex-direction: column;
+    margin-left: 5px;
+    opacity: 0;
+    transform: translateY(20%);
+    transition: all 0.3s ease-out;
+}
+
+.lib-play-btn p{
+    font-size: 10px;
+}
+
+.songlibrary li:hover{
+    cursor: pointer;
+    font-weight: 700;
+    border: 3px solid white;
+}
+
+.songlibrary li:hover .lib-play-btn{
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease-in;
+}
+
+.songlibrary li .lib-play-btn:hover{
+        transform: scale(110%) rotate(-40deg);
+        transition: all 0.3s ease-in
 }
