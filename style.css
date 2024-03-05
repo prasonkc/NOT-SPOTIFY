@@ -161,7 +161,6 @@ body {
     font-family: "Ubuntu", sans-serif;
     font-weight: 700;
     font-style: normal;
-    padding: 50px 0 15px 25px;
 }
 
 .cards{
@@ -329,6 +328,15 @@ body {
     align-items: center;
     position: relative;
     left: 15%;
+    width: 90px;
+}
+
+#vol-range{
+    width: 100px;
+}
+
+#volume img{
+    margin-left: 10px;
 }
 
 .seekbar{
@@ -352,3 +360,135 @@ body {
     transition: left 0.4s ease-in-out;
 }
 
+.hamburger{
+    display: none;
+}
+
+.close{
+    display: none;
+    position: absolute;
+    right: 8%;
+    top: 4%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .left {
+        position: relative;
+        display: none;
+        transition: all 0.3s ease-out;
+        width: 100%;
+    }
+    .right{
+        width: 100vw;
+    }
+    .hamburger{
+        /* margin: 10px; */
+        width: 30px;
+        display: block;
+        margin-right: 40px;
+        /* padding: 10px; */
+    }
+    
+     .seeker{
+        background-color: #242121;
+        min-height: 80px;
+        bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+        padding-left: 30px;
+    }
+
+
+    #song-info, #song-duration{
+        font-size: 12px;
+    }
+
+    .seekbar{
+        position: fixed;
+        margin: 15px;
+        width: 73%;
+        background-color: rgb(195, 202, 206);
+        height: 6px;
+        border-radius: 10px;
+        cursor: pointer;
+        bottom: 0.1%;
+    }
+    
+    .circle{
+        width: 12px;
+        height: 12px;
+        border-radius: 10px;
+        background-color: white;
+        position: relative;
+        left: -12%;
+        top: -22%;
+        transition: left 0.4s ease-in-out;
+        opacity: 0;
+    }
+    
+
+    .cards{
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+    }
+    .right{
+        margin: 0;
+        padding: 0;
+    }
+
+    .playlist h1{
+        padding: 25px 0 25px 25px;
+      }
+    
+    #vol-range{
+        width: 60px;
+    }
+
+    #volume{
+        width: 60px;
+        margin-right: 60px;
+    }
+
+    #volume img{
+        margin-left: 2px;
+    }
+
+  }
+
+
+
+
+  @media only screen and (max-width: 500px) {
+
+    .nav>div>div *{
+        display: none;
+    }
+    
+    .card{
+        width: 70vw;
+        margin: 0;
+    }
+
+    .cards{
+        gap: 15px;
+    }
+
+    .play-button{
+        opacity: 1;
+        top: 190px;
+        width: 80px;
+      }
+
+      .play-button:hover{
+        width: 80px;
+      }
+
+      .card:hover .play-button {
+        opacity: 1;
+    }
+
+  }

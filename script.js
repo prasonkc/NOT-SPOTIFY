@@ -1,7 +1,7 @@
 const fetchURL = "http://127.0.0.1:3000/songs/";
 
+let songs = [];
 async function getSongs(){
-    let songs = [];
     let apiCall = await fetch(fetchURL);
     let htmlString = await apiCall.text();
 
@@ -17,7 +17,7 @@ async function getSongs(){
     return songs;
 }
 
-async function addSongsToLibrary(songs){
+async function addSongsToLibrary(){
     let songLibrary = document.querySelector(".songlibrary")
     for (const i of songs) {
         let song = (i.split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
@@ -55,9 +55,19 @@ function listenForLibClicks(){
 }
 
 function listenForControls(){
-    let playBtn = document.getElementById("play-button")
+    let playBtn = document.getElementById("play-button");
+    let next = document.getElementById("next-button");
+    let prev = document.getElementById("prev-button");
+    let volume = document.getElementById("vol-range");
+    let songName = document.getElementById("song-info");
+
     
     playBtn.addEventListener("click", () => {
+        document.querySelector(".circle").style.opacity = 1;
+        if(audio.src == ""){
+            audio.src = songs[0]
+            songName.innerText = (songs[0].split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
+        }
         if(audio.paused){
             audio.play()
             playBtn.src = "/icons/pause.svg"
@@ -67,11 +77,56 @@ function listenForControls(){
             playBtn.src = "/icons/play.svg"
         }
     })
+
+    next.addEventListener("click", (e) => {
+        let index = (songs.indexOf((audio.src)));
+        audio.pause()
+        
+        if(index < songs.length){
+            audio.src = songs[index + 1]
+            songName.innerText = (songs[index + 1].split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
+            audio.play()
+        }
+    })
+
+    prev.addEventListener("click", (e) => {
+        let index = (songs.indexOf((audio.src)));
+        audio.pause()
+        
+        if(index > 0){
+            audio.src = songs[index + 1]
+            songName.innerText = (songs[index + 1].split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
+            audio.play()
+        }
+    })
+
+    volume.onchange = () => {
+        audio.volume = parseInt(volume.value)/100;
+    } 
+}
+
+function hamburgerAnimation(){
+    let hamburger = document.querySelector(".hamburger")
+    let left = document.querySelector(".left")
+    let close = document.querySelector(".close")
+    let right = document.querySelector(".right");
+    hamburger.addEventListener("click", (e) => {
+        left.style.display = "block";
+        hamburger.style.display = "none";
+        close.style.display = "block";
+        right.style.display = "none";
+    })
+
+    close.addEventListener("click", (e) => {
+        left.style.display = "none";
+        hamburger.style.display = "block";
+        right.style.display = "block";
+    })
 }
 
 async function main(){
-    let songs = await getSongs();
-    await addSongsToLibrary(songs);
+    await getSongs();
+    await addSongsToLibrary();
 
     //listen for click on left library
     listenForLibClicks();
@@ -80,6 +135,7 @@ async function main(){
         const songTime = document.getElementById("song-duration");
         songTime.textContent = secondsToTime(audio.currentTime) + " / " + secondsToTime(audio.duration);
         document.querySelector(".circle").style.left = 1 + (audio.currentTime/audio.duration) * 72 + "%";
+
     });
 
     document.querySelector(".seekbar").addEventListener("click", (e) => {
@@ -91,6 +147,8 @@ async function main(){
         audio.currentTime = (audio.duration * percentage)/100;
 
     })
+
+    hamburgerAnimation()
 
     //listen for playlist clicks
 
