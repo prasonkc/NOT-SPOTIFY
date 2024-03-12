@@ -1,8 +1,10 @@
-const fetchURL = "http://127.0.0.1:3000/songs/";
 
 let songs = [];
-async function getSongs(){
-    let apiCall = await fetch(fetchURL);
+let songsFolder;
+
+async function getSongs(folder){
+    songsFolder = folder;
+    let apiCall = await fetch(`http://127.0.0.1:3000/songs/${songsFolder}`);
     let htmlString = await apiCall.text();
 
     const parser = new DOMParser();   //This object allows you to convert HTML strings into structured DOM representation and lets you work with HTML elements as if they were on a real webpage
@@ -17,10 +19,12 @@ async function getSongs(){
     return songs;
 }
 
-async function addSongsToLibrary(){
+async function addSongsToLibrary(folder){
     let songLibrary = document.querySelector(".songlibrary")
     for (const i of songs) {
-        let song = (i.split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
+        let song = (i.split(`/songs/${songsFolder}`)[1].replaceAll("%20", "").replaceAll("_", " ").replaceAll("/", "")).split(".mp3")[0]
+        console.log(song)
+
         songLibrary.innerHTML +=  `<li>
                                     <div class="info flex items-center justify-center gap10">
                                         <img src="./icons/music-icon.svg" alt="" srcset="" class="invert">
@@ -44,7 +48,7 @@ function listenForLibClicks(){
     
     Array.from(libPlayBtns).forEach(button => {
         button.addEventListener("click", () => {
-            audio.src = (fetchURL + button.querySelector("div").querySelector("p").innerText).replaceAll(" ", "_") + ".mp3"
+            audio.src = (`http://127.0.0.1:3000/songs/${songsFolder}` + button.querySelector("div").querySelector("p").innerText).replaceAll(" ", "_")+ ".mp3"
             audio.play();
             playBtn.src = "/icons/pause.svg";
             songName.innerText = button.querySelector("div").querySelector("p").innerText
@@ -66,7 +70,7 @@ function listenForControls(){
         document.querySelector(".circle").style.opacity = 1;
         if(audio.src == ""){
             audio.src = songs[0]
-            songName.innerText = (songs[0].split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
+            songName.innerText = (songs[0].split(`/songs/${songsFolder}`)[1].replaceAll("%20", "").replaceAll("_", " ").replaceAll("/", "")).split(".mp3")[0]
         }
         if(audio.paused){
             audio.play()
@@ -84,7 +88,7 @@ function listenForControls(){
         
         if(index < songs.length){
             audio.src = songs[index + 1]
-            songName.innerText = (songs[index + 1].split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
+            songName.innerText = ((songs[index + 1].split(`/songs/${songsFolder}`)[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0])
             audio.play()
         }
     })
@@ -95,7 +99,7 @@ function listenForControls(){
         
         if(index > 0){
             audio.src = songs[index + 1]
-            songName.innerText = (songs[index + 1].split("/songs/")[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0]
+            songName.innerText = ((songs[index + 1].split(`/songs/${songsFolder}`)[1].replaceAll("%20", "").replaceAll("_", " ")).split(".mp3")[0])
             audio.play()
         }
     })
@@ -125,7 +129,7 @@ function hamburgerAnimation(){
 }
 
 async function main(){
-    await getSongs();
+    await getSongs("nfav/");
     await addSongsToLibrary();
 
     //listen for click on left library
@@ -147,14 +151,8 @@ async function main(){
         audio.currentTime = (audio.duration * percentage)/100;
 
     })
-
+    
     hamburgerAnimation()
-
-    //listen for playlist clicks
-
-    //listen for controls
-
-    // console.log(songs)
 
 }
 
